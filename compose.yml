@@ -7,7 +7,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - mynetwork2
+      - mynetwork
 
   auth_service:
     image: vpavanvemula/flm-oct:auth
@@ -16,10 +16,7 @@ services:
     ports:
       - "5001:5001"
     networks:
-      - mynetwork2
-    depends_on:
-      - db
-    
+      - mynetwork
 
   book_service:
     image: vpavanvemula/flm-oct:book
@@ -28,9 +25,8 @@ services:
     ports:
       - "5002:5002"
     networks:
-      - mynetwork2
-    depends_on:
-      - db
+      - mynetwork
+
   borrow_service:
     image: vpavanvemula/flm-oct:borrow
     deploy:
@@ -38,9 +34,7 @@ services:
     ports:
       - "5003:5003"
     networks:
-      - mynetwork2
-    depends_on:
-      - db
+      - mynetwork
 
   frontend:
     image: vpavanvemula/flm-oct:frontend
@@ -49,12 +43,8 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - mynetwork2
-    depends_on:
-      - auth_service
-      - book_service
-      - borrow_service
+      - mynetwork
 
 networks:
-  mynetwork2:
-    driver: overlay
+  mynetwork:
+    external: true
