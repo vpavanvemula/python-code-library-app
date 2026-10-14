@@ -57,4 +57,4 @@ services:
 
 networks:
   mynetwork2:
-    driver: overly
+    driver: overlay
